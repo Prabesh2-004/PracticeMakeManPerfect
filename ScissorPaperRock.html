@@ -6,8 +6,57 @@
     <title>Document</title>
 </head>
 <body>
-    <button onclick="playerMove('Rock')">Rock</button>
-    <button onclick="playerMove('Paper')">Paper</button>
-    <button onclick="playerMove('Scissor')">Scissor</button>
+    <h3>Rock Paper Scissor</h3>
+    <button onclick="playerMove('Rock')" id="rock">Rock</button>
+    <button onclick="playerMove('Paper')" id="paper">Paper</button>
+    <button onclick="playerMove('Scissor')" id="scissor">Scissor</button>
+    <button onclick="reset()">Reset</button>
+    <p id="display"></p>
+    <p id="score"></p>
+    <script>
+        let storage = JSON.parse(localStorage.getItem('storage'));
+        if (!storage) {
+            storage = { wins: 0, lost: 0, ties: 0 };
+        }
+
+        function playerMove(play) {
+            const choice = ["Rock", "Paper", "Scissor"];
+            const random = Math.floor(Math.random() * choice.length);
+            const computerMove = choice[random];
+            let result;
+            const display = document.getElementById("display");
+
+            if (play === computerMove) {
+                result = "it's a tie";
+            } else if (play === "Scissor" && computerMove === "Rock" ||
+                       play === "Paper" && computerMove === "Scissor" ||
+                       play === "Rock" && computerMove === "Paper") {
+                result = "you lost";
+            } else {
+                result = "you won";
+            }
+
+            display.textContent = `You chose ${play} and Computer chose ${computerMove}. ${result}`;
+
+            if (result === "you won") {
+                storage.wins += 1;
+            } else if (result === "you lost") {
+                storage.lost += 1;
+            } else if (result === "it's a tie") {
+                storage.ties += 1;
+            }
+            document.getElementById("score").textContent = `wins: ${storage.wins}, lost: ${storage.lost}, ties: ${storage.ties}`;
+            localStorage.setItem('storage', JSON.stringify(storage));
+        }
+        function reset(){
+            storage = {
+                wins: 0,
+                lost: 0,
+                ties: 0
+            }
+            display.textContent = "";
+            document.getElementById("score").textContent = "";
+        }
+    </script>
 </body>
 </html>

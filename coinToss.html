@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Coin Flip</h3>
+    <button onclick="playerMove('Head')">Head</button>
+    <button onclick="playerMove('Tail')">Tail</button>
+    <button onclick="reset()">Reset</button>
+    <p id="display"></p>
+    <p id="money"></p>
+    <p id="score"></p>
+    <script> 
+    let computerMoney = 1000;
+    let humanMoney = 1000;
+    let score = JSON.parse(localStorage.getItem("score"));
+        if(!score){
+            score = {
+                wins: 0,
+                lost: 0,
+                ties: 0
+            }
+        }
+        function playerMove(play){
+            let result;
+            const display = document.getElementById("display")
+            const option = ["Head", "Tail"];
+            const random = Math.floor(Math.random() * option.length);
+            const randomFlip = option[random];
+            const randomComputer = Math.floor(Math.random() * option.length);
+            const computerMove = option[randomComputer];
+            if(play === randomFlip && computerMove != randomFlip){
+                result = "You Won";
+            }
+            else if(play != randomFlip && computerMove != randomFlip || play === randomFlip && computerMove === randomFlip){
+                result = "Its a tie";
+            }
+            else if(computerMove === randomFlip && play != randomFlip){
+                result = "computer win";
+            }
+            display.textContent = `You Choose: ${play} Computer choose: ${computerMove} and Coin landed: ${randomFlip}. ${result}`;
+            if(result === "You Won"){
+                score.wins += 1;
+            }
+            else if(result === "computer win"){
+                score.lost += 1;
+            }
+            else if(result === "Its a tie"){
+                score.ties += 1;
+            }
+            document.getElementById("score").textContent = (`Wins: ${score.wins} lost: ${score.lost} and ties: ${score.ties}`);
+            localStorage.setItem("score", JSON.stringify(score));
+            if(result === "You Won"){
+                humanMoney += 10;
+                computerMoney -= 10;
+            }
+            else if (result === "computer win"){
+                humanMoney -= 10;
+                computerMoney += 10;
+            }
+            else {
+                humanMoney = humanMoney;
+                computerMoney = computerMoney;
+            }
+            document.getElementById("money").textContent = `Human Money: ${humanMoney} and Computer Money: ${computerMoney}`;
+        }
+        function reset(){
+            score = {
+                wins: 0,
+                lost: 0,
+                ties: 0
+            }
+            humanMoney = 1000;
+            computerMoney = 1000;
+            document.getElementById("display").textContent = "";
+            document.getElementById("score").textContent = "";
+            document.getElementById("money").textContent = "";
+        }
+    </script>
+</body>
+</html>
