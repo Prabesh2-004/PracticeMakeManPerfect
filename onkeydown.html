@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .button{
+        width: 100px;
+        height: 40px;
+        background-color: black;
+        color: white;
+        border-radius: 50px;
+    }
+    .clicked{
+        background-color: white;
+        color: black;
+    }
+</style>
+<body>
+    <button onkeydown="eventhandler(event)" class="button">Click</button>
+    <p id="display"></p>
+    <script>
+        function eventhandler(event){
+            const buttonElement = document.querySelector('.button')
+            if(event.key === 'Enter'){
+                document.getElementById('display').textContent = "Hello";
+            }
+            if(buttonElement.innerHTML === 'Click'){
+                buttonElement.innerHTML = 'Clicked';
+                buttonElement.classList.add('clicked');
+            }else{
+                buttonElement.innerHTML = 'Click';
+                buttonElement.classList.remove('clicked');
+            }
+        }
+    </script>
+</body>
+</html>

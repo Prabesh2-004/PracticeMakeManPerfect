@@ -51,7 +51,7 @@
             else if(result === "Its a tie"){
                 score.ties += 1;
             }
-            document.getElementById("score").textContent = (`Wins: ${score.wins} lost: ${score.lost} and ties: ${score.ties}`);
+            updateScore();
             localStorage.setItem("score", JSON.stringify(score));
             if(result === "You Won"){
                 humanMoney += 10;
@@ -67,6 +67,9 @@
             }
             document.getElementById("money").textContent = `Human Money: ${humanMoney} and Computer Money: ${computerMoney}`;
         }
+        function updateScore(){
+            document.getElementById("score").textContent = (`Wins: ${score.wins} lost: ${score.lost} and ties: ${score.ties}`);
+        }
         function reset(){
             score = {
                 wins: 0,
@@ -76,8 +79,8 @@
             humanMoney = 1000;
             computerMoney = 1000;
             document.getElementById("display").textContent = "";
-            document.getElementById("score").textContent = "";
             document.getElementById("money").textContent = "";
+            updateScore();
         }
     </script>
 </body>

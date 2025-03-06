@@ -5,19 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    body{
+        background-color: black;
+        color: white;
+    }
+    img{
+        height: 100px;
+        width: 100px;
+    }
+    button{
+        background-color: black;
+        border: 5px solid white;
+        height: 150px;
+        width: 150px;
+        border-radius: 100px;
+    }
+    .reset{
+        background-color: white;
+        border-radius: 0;
+        height: 40px;
+        width: 100px;
+        border: none;
+    }
+    #result{
+        font-weight: bold;
+        font-size: large;
+    }
+</style>
 <body>
     <h3>Rock Paper Scissor</h3>
-    <button onclick="playerMove('Rock')" id="rock">Rock</button>
-    <button onclick="playerMove('Paper')" id="paper">Paper</button>
-    <button onclick="playerMove('Scissor')" id="scissor">Scissor</button>
-    <button onclick="reset()">Reset</button>
+    <button onclick="playerMove('Rock')" id="rock"><img src="img/rock-emoji.png" alt="rock" class="moves-icon"></button>
+    <button onclick="playerMove('Paper')" id="paper"><img src="img/paper-emoji.png" alt="paper" class="moves-icon">r</button>
+    <button onclick="playerMove('Scissor')" id="scissor"><img src="img/scissor-emoji.png" alt="scissor" class="moves-icon"></button>
+    <p id="result"></p>
     <p id="display"></p>
     <p id="score"></p>
+    <button onclick="reset()" class="reset">Reset</button>
     <script>
         let storage = JSON.parse(localStorage.getItem('storage'));
         if (!storage) {
             storage = { wins: 0, lost: 0, ties: 0 };
         }
+        document.getElementById("score").textContent = `wins: ${storage.wins}, lost: ${storage.lost}, ties: ${storage.ties}`;
 
         function playerMove(play) {
             const choice = ["Rock", "Paper", "Scissor"];
@@ -27,26 +57,31 @@
             const display = document.getElementById("display");
 
             if (play === computerMove) {
-                result = "it's a tie";
+                result = "Its a Tie";
             } else if (play === "Scissor" && computerMove === "Rock" ||
                        play === "Paper" && computerMove === "Scissor" ||
                        play === "Rock" && computerMove === "Paper") {
-                result = "you lost";
+                result = "You Lost";
             } else {
-                result = "you won";
+                result = "You Win";
             }
+            document.getElementById('result').textContent = `${result}`;
+            display.innerHTML = `You: <img src="img/${play}-emoji.png" class="moves-icon">
+            <img src="img/${computerMove}-emoji.png" class="moves-icon">
+            Computer`;
 
-            display.textContent = `You chose ${play} and Computer chose ${computerMove}. ${result}`;
-
-            if (result === "you won") {
+            if (result === "You Win") {
                 storage.wins += 1;
-            } else if (result === "you lost") {
+            } else if (result === "You Lost") {
                 storage.lost += 1;
-            } else if (result === "it's a tie") {
+            } else if (result === "Its a Tie") {
                 storage.ties += 1;
             }
-            document.getElementById("score").textContent = `wins: ${storage.wins}, lost: ${storage.lost}, ties: ${storage.ties}`;
+            updateScore();
             localStorage.setItem('storage', JSON.stringify(storage));
+        }
+        function updateScore(){
+            document.getElementById("score").textContent = `wins: ${storage.wins}, lost: ${storage.lost}, ties: ${storage.ties}`;
         }
         function reset(){
             storage = {
@@ -55,7 +90,9 @@
                 ties: 0
             }
             display.textContent = "";
-            document.getElementById("score").textContent = "";
+            document.getElementById('result').innerHTML = "";
+            localStorage.removeItem('storage');
+            updateScore();
         }
     </script>
 </body>
