@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+        body{
+            font-family: poppins;
+        }
+        .money-container{
+            height: 300px;
+            width: 377px;
+            background-image: url(img/ani.png);
+            background-color: aqua;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+        .account{
+            margin-left: 20px;
+        }
+        .brand-logo-dark{
+            height: 30px;
+            margin: 20px 0 0 20px;
+        }
+        button{
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            margin-left: 30%;
+            height: 20px;
+        }
+        .eye{
+            filter: brightness(0);
+            height: 20px;
+        }
+        .eye-close{
+            filter: brightness(0);
+            height: 20px;
+        }
+        p{
+            margin-left: 20px;
+            margin-bottom: 5px;
+        }
+        #avilable{
+            color: gray;
+            margin-top: 2px;
+        }
+        .currency-name{
+            font-weight: bolder;
+            margin-top: 2px;
+            display: block;
+        }
+        .amount{
+            margin-left: 10px;
+        }
+        #actual{
+            color: gray;
+            display: inline-block;
+            margin-top: 2px;
+        }
+        #accrued{
+            margin-left: 10%;
+            display: inline-block;
+            color: gray;
+            margin-top: 2px;
+        }
+        .currency{
+            display: inline-block;
+            font-weight: bolder;
+            margin-top: 2px;
+        }
+        .currency-interest{
+            display: inline-block;
+            font-weight: bolder;
+            margin-left: 20%;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="money-container">
+        <img src="img/brand-logo-dark.svg" class="brand-logo-dark">
+        <button onclick="hide()" class="eye-open"><img src="img/eyeopen.png" class="eye"></button>
+        <p class="bank-name">SIDDHARTHA GEN - Z SAVING</p><span class="account">ACCOUNT</span>
+        <p id="account-number">55507600415</p>
+        <p id="avilable">Available Balance</p>
+        <p class="currency-name">NPR <span class="available-amount">100000</span></p>
+        <p id="actual">Actual balance</p>
+        <p id="accrued">Accrued Interest</p>
+        <p class="currency">NPR <span class="total-amount">110000</span></p>
+        <p class="currency-interest">NPR <span class="interest">1100</span></p>
+    </div>
+    <script>
+        const button = document.querySelector('.eye-open');
+        const accountNumber = document.querySelector('#account-number');
+        const availableAmount = document.querySelector('.available-amount');
+        const totalAmount = document.querySelector('.total-amount');
+        const interest = document.querySelector('.interest');
+        function hide(){
+            const eyeImg = button.querySelector('.eye');
+            if(eyeImg.src.includes('eyeopen.png')){
+                eyeImg.src = 'img/eyeclose.png';
+                eyeImg.classList.add('eye-close');
+                accountNumber.innerHTML = '55*******15';
+                availableAmount.innerHTML = '******';
+                totalAmount.innerHTML = '******';
+                interest.innerHTML = '****';
+            }else{
+                eyeImg.src = 'img/eyeopen.png';
+                eyeImg.classList.remove('eye-close');
+                eyeImg.classList.add('eye');
+                accountNumber.innerHTML = '55507600415';
+                availableAmount.innerHTML = `100000`;
+                totalAmount.innerHTML = '110000';
+                interest.innerHTML = '1100';
+            }
+        }
+    </script>
+</body>
+</html>

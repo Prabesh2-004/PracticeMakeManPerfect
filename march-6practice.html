@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        button{
+        button {
             padding: 10px;
             font-weight: bolder;
             border: none;
@@ -14,79 +14,83 @@
             cursor: pointer;
             border-radius: 10px;
         }
-        .good{
+        .good {
             background-color: rgb(180, 180, 180);
             color: black;
         }
-        input{
+        input {
             margin-top: 50px;
             padding: 10px;
             font-weight: bold;
         }
-        .calculate{
+        .calculate {
             background-color: green;
             border-radius: 2px;
             padding: 12px;
         }
-        .display{
+        .display {
             color: red;
         }
     </style>
 </head>
 <body>
-    <button onclick="eventhandlerButton()" class="button">Button</button>
-    <button onclick="eventhandlerView()" class="view">View</button>
-    <button onclick="eventhandlerBankai()" class="bankai">Bankai</button><br>
-    <input type="text" placeholder="Cost" class="myInput">
+    <button onclick="eventhandlerButton(this)" class="button">Button</button>
+    <button onclick="eventhandlerView(this)" class="view">View</button>
+    <button onclick="eventhandlerBankai(this)" class="bankai">Bankai</button><br>
+    <input type="text" placeholder="Cost" class="myInput" onkeydown="eventhandler()">
     <button onclick="calculate()" class="calculate">Calculate</button>
     <p class="display"></p>
     <script>
         const myInput = document.querySelector('.myInput');
         const display = document.querySelector('.display');
-        const change = document.querySelector('.button');
-        const view = document.querySelector('.view');
-        const bankai = document.querySelector('.bankai');
-        function eventhandlerButton(){
-            if(change.innerHTML === 'Button'){
-                change.innerHTML = 'Good!';  
-                change.classList.add('good');
-            }else{
-                change.innerHTML = 'Button';
-                change.classList.remove('good');
+        const buttons = document.querySelectorAll('button');
+
+        function eventhandler() {
+            if (event.key === 'Enter') {
+                calculate();
             }
         }
-        function eventhandlerView(){
-            if(view.innerHTML === 'View'){
-                view.innerHTML = 'Viewed';  
-                view.classList.add('good');
-            }else{
-                view.innerHTML = 'View';
-                view.classList.remove('good');
-            }
+
+        function deactivateButtons() {
+            buttons.forEach(button => {
+                button.classList.remove('good');
+                if (button.innerHTML === 'Good!' || button.innerHTML === 'Viewed' || button.innerHTML === 'Aizen') {
+                    button.innerHTML = button.classList.contains('button') ? 'Button' :
+                                       button.classList.contains('view') ? 'View' : 'Bankai';
+                }
+            });
         }
-        function eventhandlerBankai(){
-            if(bankai.innerHTML === 'Bankai'){
-                bankai.innerHTML = 'Aizen';  
-                bankai.classList.add('good');
-            }else{
-                bankai.innerHTML = 'Bankai';
-                bankai.classList.remove('good');
-            }
+
+        function eventhandlerButton(button) {
+            deactivateButtons();
+            button.innerHTML = 'Good!';
+            button.classList.add('good');
         }
-        function calculate(){
+
+        function eventhandlerView(button) {
+            deactivateButtons();
+            button.innerHTML = 'Viewed';
+            button.classList.add('good');
+        }
+
+        function eventhandlerBankai(button) {
+            deactivateButtons();
+            button.innerHTML = 'Aizen';
+            button.classList.add('good');
+        }
+
+        function calculate() {
             let total = Number(myInput.value);
-            if(total > 0){
-                if(total < 40){
+            if (total > 0) {
+                if (total < 40) {
                     total = total + 10;
                     display.innerHTML = `$${total}`;
-                }
-                else{
+                } else {
                     display.innerHTML = `$${total}`;
                 }
-            }else{
+            } else {
                 display.innerHTML = 'Value must not be less than $0';
             }
-
         }
     </script>
 </body>

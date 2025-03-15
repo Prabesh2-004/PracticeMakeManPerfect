@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const myArray = [
+            'Death Note',
+            'Attack on Titan',
+            'Code Geass',
+            'Bleach',
+            'Demon Slayer'
+        ];
+        for(let i=0; i<=myArray.length-1;i++){
+            const value = myArray[i];
+            console.log(value);
+        }
+       const number = [1,2,3,4,5];
+       let total = 0;
+       for(let i=0;i<number.length;i++){
+        const sum = number[i]
+        total += sum;
+       }
+       console.log(total);
+
+       const doubleNumber = [];
+       for(let i = 0; i<number.length;i++){
+        const sum = number[i];
+        doubleNumber.push(sum * 2)
+        total += sum;
+       }
+       console.log(doubleNumber);
+       console.log(total);
+    </script>
+</body>
+</html>

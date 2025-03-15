@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: black;
+        }
+        #toggleButton{
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+
+        }
+        img{
+            filter: brightness(180);
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="eventhandler()" id="toggleButton"><img src="img/eyeopen.png"></button>
+    <div id="message" style="display: none; color: white;">This is the message that will appear and disappear!</div>
+    <script>
+        const button = document.getElementById('toggleButton');
+        const message = document.getElementById('message');
+        function eventhandler(){
+        if(button.innerHTML === '<img src="img/eyeopen.png">'){
+            button.innerHTML = '<img src="img/eyeclose.png">';
+        }else{
+            button.innerHTML = '<img src="img/eyeopen.png">';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+    button.addEventListener('click', function() {
+        // Toggle between displaying and hiding the message
+        if (message.style.display === 'none') {
+        message.style.display = 'block';
+        } else {
+        message.style.display = 'none';
+        }
+    });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <style>
+        body {
+  font-family: Arial;
+  padding-bottom: 100px;
+}
+
+.todo-name,
+.todo-due-date {
+  font-size: 15px;
+  padding: 6px;
+}
+
+.add-todo-button,
+.delete-todo-button {
+  color: white;
+  border: none;
+  font-size: 15px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.add-todo-button {
+  background-color: green;
+}
+
+.delete-todo-button {
+  background-color: darkred;
+}
+
+.todo-row {
+  display: grid;
+  grid-template-columns: 200px 150px 100px;
+  align-items: center;
+  column-gap: 10px;
+  margin-bottom: 10px;
+}
+
+.todo-input-row {
+  align-items: stretch;
+}
+
+.todo-list-title {
+  margin-top: 50px;
+}
+
+    </style>
+</head>
+<body>
+    <p class="todo-list-title">Todo List</p>
+    <div class="todo-row todo-input-row">
+      <input class="js-todo-name todo-name" placeholder="Todo name">
+      <input class="js-todo-due-date todo-due-date" type="date">
+      <button class="add-todo-button" onclick="addTodo()">Add</button>
+    </div>
+    <div class="todo-list js-todo-list"></div>
+
+    <script src="script/array.js"></script>
+</body>
+</html>
