@@ -17,10 +17,15 @@
             background-color: aqua;
             color: black;
         }
+        input{
+            padding: 10px;
+        }
     </style>
 </head>
 <body>
+    <input type="text" class="userInput" onkeydown="enterAction()">
     <button onclick="eventhandler()" class="button">Click</button>
+    <p class="display"></p>
     <!--
     <p>Rock Paper Scissor</p>
     <button onclick="PlayerMove('Rock')">Rock</button>
@@ -81,18 +86,30 @@
             document.querySelector('.score').innerHTML = `Win: ${score.win} Lost: ${score.lost} Tie: ${score.tie}`;
         }
             */
+            function enterAction(){
+                if(event.key === 'Enter'){
+                    eventhandler();
+                }
+        }
 
         function eventhandler(){
             const buttonElement = document.querySelector('.button');
-            if(buttonElement.innerHTML === 'Click'){
-                buttonElement.innerHTML = 'Clicked';
-                buttonElement.classList.add('clicked');
+            const userInput = document.querySelector('.userInput');
+            const inputElement = userInput.value;
+            const display = document.querySelector('.display');
+            display.innerHTML = inputElement;
+
+
             }
-            else{
-                buttonElement.innerHTML = 'Click';
-                buttonElement.classList.remove('clicked');
-            }
-        }
+            
+            // if(buttonElement.innerHTML === 'Click'){
+            //     buttonElement.innerHTML = 'Clicked';
+            //     buttonElement.classList.add('clicked');
+            // }
+            // else{
+            //     buttonElement.innerHTML = 'Click';
+            //     buttonElement.classList.remove('clicked');
+            // }
     </script>
 </body>
 </html>

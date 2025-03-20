@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input{
+            padding: 10px;
+        }
+        .container,
+        .todo-grid{
+            display: grid;
+            grid-template-columns: 200px 150px 100px;
+            gap: 10px;
+            align-items: center;
+        }
+        .container{
+            margin-bottom: 10px;
+        }
+        button{
+            padding: 10px;
+            background-color: green;
+            border: none;
+            color: white;
+            font-weight: bold;
+        }
+        .delete{
+            padding: 10px;
+            background-color: rgb(178, 2, 2);
+        }
+    </style>
+</head>
+<body>
+    <h3>To Do List</h3>
+    <div class="container">
+    <input type="text" class="js-input-box" placeholder="To Do List" onkeydown="eventHandler()">
+    <input type="date" class="js-date" onkeydown="eventHandler()">
+    <button onclick="todolistButton()" class="js-button">Add</button>
+    </div>
+    <div class="display todo-grid"></div>
+    <script>
+        let myArray = JSON.parse(localStorage.getItem('myArray'))
+        if(!myArray){
+            myArray = [];
+        }
+        const display = document.querySelector('.display');
+        function renderTodoList(){
+            todolist = '';
+            for(let i=0; i<myArray.length; i++){
+                const todoObject = myArray[i];
+                const {name, dueDate} = todoObject;
+                todolist += `
+                <div>${name}</div>
+                <div>${dueDate}</div>
+                <button class="delete" onclick="deleteToDoList(${i})">Delete</button>`; 
+            }
+            localStorage.setItem('myArray', JSON.stringify(myArray));
+            display.innerHTML = todolist;
+        }
+        function todolistButton(){
+            const inputText = document.querySelector('.js-input-box');
+            const inputElement = inputText.value;
+            const dateMarking = document.querySelector('.js-date');
+            const dateElement = dateMarking.value;
+            myArray.push({name:inputElement, dueDate: dateElement});
+            inputText.value = '';
+            renderTodoList();
+        }
+        function deleteToDoList(i){
+            myArray.splice(i, 1);
+            renderTodoList()
+        }
+        function eventHandler(){
+            if(event.key === 'Enter'){
+                todolistButton();
+            }
+        }
+    </script>
+</body>
+</html>

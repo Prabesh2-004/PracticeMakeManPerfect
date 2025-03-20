@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        div{
+            justify-items: center;
+        }
+        .inputElement{
+            display: block;
+            padding: 10px;
+
+        }
+        button{
+            padding: 1rem 1.5rem;
+            margin-top: 5px;
+        }
+        .nonContainer{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h4>Login</h4>
+        Email: <input type="email" class="inputElement" onkeydown="eventhandler()">
+        Password: <input type="password" class="inputElement" onkeydown="eventhandler()">
+        <button class="loginButton" onclick="loginAction()">Login</button>
+    </div>
+    <div class="nonContainer"></div>
+    <script>
+        const inputElement = document.querySelectorAll('.inputElement');
+        const userInput = inputElement.value;
+        const container = document.querySelector('.container');
+        const loginButton = document.querySelector('.loginButton')
+        const nonContainer = document.querySelector('.nonContainer')
+
+        // function loginAction(){
+            
+        // }
+            loginButton.addEventListener('click', function() {
+        if (container.style.display === 'block' || nonContainer.style.display === 'none') {
+        container.style.display = 'none';
+        nonContainer.style.display = 'block';
+        } else {
+        container.style.display = 'none';
+        nonContainer.style.display = 'block';
+        }
+    });
+     document.querySelector('.nonContainer').innerHTML = 'You Now logged in'
+    </script>
+</body>
+</html>
