@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>To Do List</h3>
+    <div>
+    <input type="text" placeholder="To Do List" class="js-input-box">
+    <input type="date" class="js-date">
+    <button class="js-button" onclick="AddToDoList()">Add</button>
+    </div>
+    <div class="display"></div>
+
+    <script>
+        const display = document.querySelector('.display');
+        let todoListArray = [];
+        function renderToDoList(){
+            let todolist = '';
+            todoListArray.forEach(function({name, dueDate}, index){
+                todolist += `<div>${name}</div>
+                <div>${dueDate}</div>
+                <button onclick="deletebtn(${index})">Delete</button>`;
+            });
+            display.innerHTML = todolist;
+        } 
+        function AddToDoList(){
+            const inputText = document.querySelector('.js-input-box');
+            const inputElement = inputText.value;
+            const inputDate = document.querySelector('.js-date');
+            const dateElement = inputDate.value;
+            todoListArray.push({name:inputElement, dueDate: dateElement});
+            inputText.value = '';
+            inputDate.value = '';
+            renderToDoList();
+        }
+        function deletebtn(index){
+            todoListArray.splice(index, 1);
+            renderToDoList()
+        }
+    </script>
+</body>
+</html>

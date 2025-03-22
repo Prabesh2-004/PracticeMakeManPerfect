@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container,
+        .todo-grid{
+            display: grid;
+            grid-template-columns: 200px 150px 100px;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h3>To Do List</h3>
+    <div class="container">
+    <input type="text" placeholder="To Do List" class="js-input-box">
+    <input type="date" class="js-date-box">
+    <button onclick="addtoDoList()">ADD</button>
+    </div>
+    <div class="display todo-grid"></div>
+    <script>
+        const display = document.querySelector('.display');
+        const storeArray = [];
+        function renderToDoList(){
+            let todolist = '';
+            for(let i=0;i<storeArray.length;i++){
+                const {name, dueDate} = storeArray[i];
+                todolist += `
+                <div>${name}</div>
+                <div>${dueDate}</div>
+                <button onclick="deleteArray(${i})">Delete</button>`; 
+            }
+            display.innerHTML = todolist;
+        }
+        function addtoDoList(){
+            const inputText = document.querySelector('.js-input-box');
+            const inputElement = inputText.value;
+            const dateMarking = document.querySelector('.js-date-box');
+            const dateElement = dateMarking.value;
+            storeArray.push({name: inputElement, dueDate: dateElement});
+            inputText.value = '';
+            dateMarking.value = '';
+            renderToDoList();
+        }
+        function deleteArray(i){
+            storeArray.splice(i, 1);
+            renderToDoList();
+        }
+    </script>
+</body>
+</html>

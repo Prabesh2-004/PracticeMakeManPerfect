@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Little Advance Scissor Paper Rock</h3>
+    <Button onclick="PlayerMove('Rock')">Rock</Button>
+    <Button onclick="PlayerMove('Paper')">Paper</Button>
+    <Button onclick="PlayerMove('Scissor')">Scissor</Button>
+    <button onclick="autoPlay()">Auto Move</button>
+    <div class="display"></div>
+    <div class="answer"></div>
+    <div class="score"></div>
+    <script>
+        const display = document.querySelector('.display');
+        const score = document.querySelector('.score');
+        const answer = document.querySelector('.answer');
+        let result;
+        let store = {
+            wins: 0,
+            losts: 0,
+            ties: 0
+        }
+    //     function PlayerMove(played){
+    //         const myMove = ['Rock','Paper','Scissor'];
+    //         const move = Math.floor(Math.random() * myMove.length);
+    //         const choice = myMove[move];
+    //         const computerMove = choice;
+    //         // const YourMove = Math.floor(math.random() * myMove.length);
+    //         // const yourChoice = myMove[YourMove];
+    //         if(played === choice){
+    //             result = 'Its a Tie';
+    //         }
+    //         else if(played === 'Rock' && computerMove === 'Paper' || played === 'Scissor' && computerMove === 'Rock' || played === 'Paper' && computerMove === 'Scissor'){
+    //             result = 'You Loose';
+    //         }
+    //         else{
+    //             result = 'You Win';
+    //         }
+    //         display.innerHTML = result;
+    //         answer.innerHTML = `You: ${played} Computer: ${computerMove}`;
+    //         if(result === 'You Win'){
+    //             store.wins += 1;
+    //         }
+    //         else if(result === 'You Loose'){
+    //             store.losts += 1;
+    //         }
+    //         else{
+    //             store.ties += 1;
+    //         }
+    //         score.innerHTML = `Wins: ${store.wins} losts: ${store.losts} ties: ${store.ties}`;
+    // }
+            function autoPlay(){
+            setInterval(function(){
+                const myMove = ['Rock','Paper','Scissor'];
+                const move = Math.floor(Math.random() * myMove.length);
+                const choice = myMove[move];
+                const computerMove = choice;
+                const YourMove = Math.floor(Math.random() * myMove.length);
+                const yourChoice = myMove[YourMove];
+                if(yourChoice === computerMove){
+                    result = 'Its a Tie';
+                }
+                else if(yourChoice === 'Rock' && computerMove === 'Paper' || yourChoice === 'Scissor' && computerMove === 'Rock' || yourChoice === 'Paper' && computerMove === 'Scissor'){
+                    result = 'You Loose';
+                }
+                else{
+                    result = 'You Win';
+                }
+                display.innerHTML = result;
+                answer.innerHTML = `You: ${yourChoice} Computer: ${computerMove}`;
+                if(result === 'You Win'){
+                    store.wins += 1;
+                }
+                else if(result === 'You Loose'){
+                    store.losts += 1;
+                }
+                else{
+                    store.ties += 1;
+                }
+                score.innerHTML = `Wins: ${store.wins} losts: ${store.losts} ties: ${store.ties}`;
+            }, 1000)
+        }
+
+
+    </script>
+</body>
+</html>
